@@ -1,0 +1,5 @@
+_hg()
+{
+  local cur commands
+}
+#complete -F _hg $default hg

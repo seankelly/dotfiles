@@ -1,0 +1,5 @@
+alias ls="ls --color=auto -F"
+alias nao="TERM=\"screen\" telnet nethack.alt.org"
+alias noway="TERM=\"screen\" telnet noway.ratry.ru 37331"
+alias vim="vim -T xterm-256color"
+alias taeb-push="darcs push katron.org:www/repos/TAEB/"
