@@ -1,26 +1,45 @@
 syntax on
 filetype plugin on
 filetype indent on
-set showmode
-set showmatch
-set showcmd
-set ruler
+
+set autoindent
 set background=light
-set tabstop=8
-set sw=4 sts=4
-set smarttab autoindent expandtab
+set backspace=eol,indent,start
 set cindent
-set nomodeline
+set confirm
+set display+=lastline,uhex,
+set expandtab
 set grepprg=grep\ -nH\ $*
+set hidden
+set nomodeline
+set ruler
+set scrolloff=3
+set shiftround
+set shiftwidth=4
+set showcmd
+set showmatch
+set showmode
+set smarttab
+set softtabstop=4
 set t_Co=16
+set tabstop=8
 set tildeop
+set ttimeoutlen=50
 set wildignore+=.o,.out
 
 map Y y$
 
-let g:Textobj_regex_enable = 1
-"let g:Textobj_fold_enable = 1
-let g:Textobj_arg_enable = 1
+let g:tex_flavor="latex"
+
+let g:Textobj_defs = [
+   \['/', 'Textobj_paired', '/'],
+   \['f', 'Textobj_fold'],
+   \[',', 'Textobj_arg'],
+\]
+
+let g:Skeleton_patterns = [
+    \'*.pl'
+\]
 
 autocmd BufReadPost *
 \  if line("'\"") > 0 && line("'\"") <= line("$") |
