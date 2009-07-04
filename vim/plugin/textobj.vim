@@ -1,11 +1,12 @@
 " Text object creation {{{
+" XXX: use virtualedit here, it should greatly simplify things
 let s:text_object_number = 0
-function Textobj(char, callback)
+function Textobj(char, callback, ...)
     let s:text_object_number += 1
-    function s:textobj_{s:text_object_number}(inner, operator, count, callback)
+    function s:textobj_{s:text_object_number}(inner, operator, count, callback, ...)
         try
             let pos = getpos('.')
-            sandbox let [startline, startcol, endline, endcol] = function(a:callback)(a:inner, a:count)
+            sandbox let [startline, startcol, endline, endcol] = call(a:callback, [a:inner, a:count] + a:000)
         catch /no-match/
             return
         finally
@@ -14,48 +15,57 @@ function Textobj(char, callback)
         if startline == endline
             let objlength = endcol - startcol + 1
         else
-            let lines = getline(startline + 1, endline - 1)
-            let lines = [strpart(getline(startline), startcol - 1)] +
-            \           lines +
-            \           [strpart(getline(endline), 0, endcol)]
             let objlength = 0
-            for line in lines
-                let objlength += strlen(line) + 1
-            endfor
-            let objlength -= 1
+            if endline - startline > 1
+                exe 'let objlength += '.join(map(getline(startline + 1, endline - 1), 'strlen(v:val) + 1'), '+')
+            endif
+            let objlength += endcol + strlen(getline(startline)) - startcol + 2
         endif
+        let whichwrap = &whichwrap
+        set whichwrap+=s
+        let virtualedit = &virtualedit
         if startcol > strlen(getline(startline))
             let startcol = 1
             let startline += 1
             let objlength -= 1
         endif
+        if endcol == 0
+            set virtualedit=onemore
+        endif
+        if a:operator == 'v'
+            let objlength -= 1
+        endif
         call cursor(startline, startcol)
-        exe 'normal! '.a:operator.objlength.' '
+        if a:operator == 'c'
+            let operator = 'd'
+        else
+            let operator = a:operator
+        end
+        exe 'normal! '.operator.objlength.' '
 
         if a:operator == 'c'
-            normal! l
             startinsert
-        elseif a:operator == 'v'
-            exe "normal! \<BS>"
         endif
+        let &whichwrap = whichwrap
+        let &virtualedit = virtualedit
     endfunction
 
-    exe 'onoremap <silent>a'.a:char.' <Esc>:call <SID>textobj_'.s:text_object_number.'(0, v:operator, v:prevcount, "'.a:callback.'")<CR>'
-    exe 'onoremap <silent>i'.a:char.' <Esc>:call <SID>textobj_'.s:text_object_number.'(1, v:operator, v:prevcount, "'.a:callback.'")<CR>'
-    exe 'xnoremap <silent>a'.a:char.' <Esc>:call <SID>textobj_'.s:text_object_number.'(0, "v", v:prevcount, "'.a:callback.'")<CR>'
-    exe 'xnoremap <silent>i'.a:char.' <Esc>:call <SID>textobj_'.s:text_object_number.'(1, "v", v:prevcount, "'.a:callback.'")<CR>'
+    exe 'onoremap <silent>a'.a:char.' <Esc>:call call("<SID>textobj_'.s:text_object_number.'", [0, v:operator, v:prevcount, "'.a:callback.'"] + '.string(a:000).')<CR>'
+    exe 'onoremap <silent>i'.a:char.' <Esc>:call call("<SID>textobj_'.s:text_object_number.'", [1, v:operator, v:prevcount, "'.a:callback.'"] + '.string(a:000).')<CR>'
+    exe 'xnoremap <silent>a'.a:char.' <Esc>:call call("<SID>textobj_'.s:text_object_number.'", [0, "v", v:prevcount, "'.a:callback.'"] + '.string(a:000).')<CR>'
+    exe 'xnoremap <silent>i'.a:char.' <Esc>:call call("<SID>textobj_'.s:text_object_number.'", [1, "v", v:prevcount, "'.a:callback.'"] + '.string(a:000).')<CR>'
 endfunction
 " }}}
 " Text object definitions {{{
-" / for regex {{{
-function s:textobj_regex(inner, count)
+" arbitrary paired symbols (/ for regex, etc) {{{
+function Textobj_paired(inner, count, char)
     let pos = getpos('.')
 
     let line = strpart(getline(pos[1]), 0, pos[2])
     let lines = getline(1, pos[1] - 1) + [line]
     let linenum = pos[1]
     for line in reverse(lines)
-        let objstart = match(line, '.*\zs\\\@<!/') + 1
+        let objstart = match(line, '.*\zs\\\@<!'.a:char) + 1
         if objstart != 0
             break
         endif
@@ -71,21 +81,21 @@ function s:textobj_regex(inner, count)
     let lines = [line] + getline(pos[1] + 1, line('$'))
     let linenum = pos[1]
     for line in lines
-        let objend = match(line, '\\\@<!/') + 1
+        let objend = match(line, '\\\@<!'.a:char) + 1
         if objend != 0
             if linenum == pos[1]
                 " have to account for the possibility of a split escape
                 " sequence
                 if objend == 1
                     if getline(pos[1])[pos[2] - 2] == '\'
-                        let objend = match(line, '\\\@<!/', 1) + 1
+                        let objend = match(line, '\\\@<!'.a:char, 1) + 1
                         if objend == 0
                             let linenum += 1
                             continue
                         endif
                     else
-                        " if we're sitting on a /, don't do anything, since it's
-                        " impossible to know which direction to look
+                        " if we're sitting on a char, don't do anything, since
+                        " it's impossible to know which direction to look
                         throw 'no-match'
                     endif
                 endif
@@ -105,7 +115,7 @@ function s:textobj_regex(inner, count)
 endfunction
 " }}}
 " f for folds {{{
-function s:textobj_fold(inner, count)
+function Textobj_fold(inner, count)
     if foldlevel(line('.')) == 0
         throw 'no-match'
     endif
@@ -118,7 +128,7 @@ function s:textobj_fold(inner, count)
 endfunction
 " }}}
 " , for function arguments {{{
-function s:textobj_arg(inner, count)
+function Textobj_arg(inner, count)
     let pos = getpos('.')
     let curchar = getline(pos[1])[pos[2] - 1]
     if curchar == ','
@@ -221,14 +231,9 @@ function s:textobj_arg(inner, count)
 endfunction
 " }}}
 " }}}
-" Text object creation {{{
-if exists("g:Textobj_regex_enable") && g:Textobj_regex_enable
-    call Textobj('/', "<SID>textobj_regex")
-endif
-if exists("g:Textobj_fold_enable") && g:Textobj_fold_enable
-    call Textobj('f', "<SID>textobj_fold")
-endif
-if exists("g:Textobj_arg_enable") && g:Textobj_arg_enable
-    call Textobj(',', "<SID>textobj_arg")
-endif
+" Text object loading {{{
+for object in g:Textobj_defs
+    call call('Textobj', object)
+endfor
+unlet object
 " }}}
