@@ -1,4 +1,8 @@
+# vim is my editor of choice
 set -x EDITOR vim
+
+# unset fish greeting
+set -e fish_greeting
 
 # clear out PATH first
 if status --is-login
