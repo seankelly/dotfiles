@@ -4,6 +4,7 @@
 dot_files="
     bash
     fortune
+    gitconfig
     gitignore
     vim
     vimrc
