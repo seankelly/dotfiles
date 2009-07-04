@@ -12,3 +12,40 @@ dot_files="
 config_files="
     fish
 "
+
+if [ $# -eq 0 ]; then
+    echo Need to specify destination directory
+    exit 1
+fi
+
+target="$1"
+
+if [ -e "$target" ]; then
+    if [ ! -d "$target" ]; then
+        echo Target not a directory, exiting
+        exit 1
+    fi
+else
+    mkdir -p "$target"
+fi
+
+# installs target to the specified destination
+# arguments:
+#   <target> <destination>
+function install() {
+    if [ -e "$2" -a ! -h "$2" ]; then
+        mv "$2" "$2.bak"
+    fi
+
+    dir=`dirname "$2"`
+    mkdir -p "$dir"
+    cp -a "$1" "$2"
+}
+
+for file in $dot_files; do
+    install "$file" "$target/.$file"
+done
+
+for file in $config_files; do
+    install "$file" "$target/.config/$file"
+done
