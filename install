@@ -1,1 +1,14 @@
 #!/bin/sh
+
+# prefixed solely with '.'
+dot_files="
+    bash
+    fortune
+    vim
+    vimrc
+"
+
+# prefixed by .config/
+config_files="
+    fish
+"
