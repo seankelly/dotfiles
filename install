@@ -34,7 +34,7 @@ fi
 # installs target to the specified destination
 # arguments:
 #   <target> <destination>
-function install() {
+install() {
     if [ -e "$2" -a ! -h "$2" ]; then
         mv "$2" "$2.bak"
     fi
