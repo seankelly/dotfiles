@@ -1,6 +1,10 @@
 # vim is my editor of choice
 set -x EDITOR vim
 
+set -x NOPASTE_SERVICES Pastie PastebinCom Shadowcat
+
+set -x PERL5LIB lib $PERL5LIB
+
 # unset fish greeting
 set -e fish_greeting
 
