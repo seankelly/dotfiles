@@ -21,7 +21,7 @@ set showmatch
 set showmode
 set smarttab
 set softtabstop=4
-set t_Co=16
+set t_Co=256
 set tabstop=8
 set tildeop
 set ttimeoutlen=50
