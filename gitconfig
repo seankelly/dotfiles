@@ -1,5 +1,7 @@
 [user]
-        name = Sean Kelly
+	name = Sean Kelly
 	email = github@katron.org
 [core]
 	excludesfile = /home/sean/.gitignore
+[color]
+	ui = auto
