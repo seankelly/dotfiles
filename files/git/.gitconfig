@@ -1,7 +1,12 @@
 [user]
 	name = Sean Kelly
-	email = github@katron.org
+	email = code@katron.org
 [core]
 	excludesfile = /home/sean/.gitignore
+	preloadindex = true
 [color]
 	ui = auto
+[push]
+	default = simple
+[receive]
+	denyCurrentBranch = warn
