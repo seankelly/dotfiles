@@ -1,12 +1,16 @@
-[user]
-	name = Sean Kelly
-	email = code@katron.org
 [core]
-	excludesfile = /home/sean/.gitignore
-	preloadindex = true
+    excludesfile = /home/sean/.gitignore
+    preloadindex = true
 [color]
-	ui = auto
+    ui = auto
+[log]
+    date = local
+[merge]
+    conflictstyle = diff3
 [push]
-	default = simple
+    default = simple
 [receive]
-	denyCurrentBranch = warn
+    denyCurrentBranch = warn
+[user]
+    name = Sean Kelly
+    email = code@katron.org
