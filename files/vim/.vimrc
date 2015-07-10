@@ -6,8 +6,6 @@ call vundle#rc()
 
 Plugin 'gmarik/vundle'
 
-"Bundle 'altercation/vim-colors-solarized'
-"Bundle 'nanotech/jellybeans.vim'
 Bundle 'Lokaltog/vim-distinguished'
 
 
