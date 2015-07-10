@@ -7,6 +7,7 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 Bundle 'Lokaltog/vim-distinguished'
+Bundle 'davidhalter/jedi-vim'
 
 
 syntax on
