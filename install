@@ -1,3 +1,9 @@
 #!/bin/sh
 
-stow files/* --target "$HOME"
+if command -v stow >/dev/null ; then
+    cd files
+    stow * --target "$HOME"
+else
+    echo >&2 "Need to have stow installed."
+    exit 1
+fi
