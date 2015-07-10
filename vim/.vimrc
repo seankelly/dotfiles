@@ -8,6 +8,7 @@ Plugin 'gmarik/vundle'
 
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'davidhalter/jedi-vim'
+Bundle 'rust-lang/rust.vim'
 
 
 syntax on
