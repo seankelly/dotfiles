@@ -32,3 +32,6 @@ compinit
 if [[ $TERM == screen ]]; then
     export TERM=screen-256color
 fi
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
+export PATH=$PATH:$HOME/local/bin
