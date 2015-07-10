@@ -57,6 +57,8 @@ autocmd BufReadPost *
 \ endif
 
 "autocmd BufNewFile,BufReadPre *.yaml,*.yml setlocal regexpengine=1
+autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2
 autocmd FileType php setlocal noexpandtab softtabstop=0 shiftwidth=0
+autocmd FileType c,cpp setlocal noexpandtab softtabstop=0 shiftwidth=0
 
 colorscheme distinguished
