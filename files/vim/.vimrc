@@ -42,6 +42,9 @@ set softtabstop=4
 set tabstop=8
 set tildeop
 set ttimeoutlen=50
+set undofile
+set undodir=$HOME/.vim/undo
+"set viminfo='100,<50,s10,h
 set wildignore+=.o,.out
 
 let fortran_free_source=1
