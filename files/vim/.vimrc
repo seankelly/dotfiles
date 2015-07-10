@@ -23,6 +23,7 @@ set grepprg=grep\ -nH\ $*
 set hidden
 set ignorecase
 set incsearch
+set nobackup
 set nojoinspaces
 set nomodeline
 set nostartofline
