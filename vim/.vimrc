@@ -1,15 +1,17 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-surround'
 
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'rust-lang/rust.vim'
 
+call vundle#end()
 
 syntax on
 filetype plugin indent on
@@ -30,9 +32,9 @@ set nojoinspaces
 set nomodeline
 set nostartofline
 set omnifunc=syntaxcomplete#Complete
-"set regexpengine=1
 set ruler
 set scrolloff=3
+set shell=/bin/sh
 set shiftround
 set shiftwidth=4
 set showcmd
@@ -46,19 +48,21 @@ set tildeop
 set ttimeoutlen=50
 set undofile
 set undodir=$HOME/.vim/undo
-"set viminfo='100,<50,s10,h
 set wildignore+=.o,.out
+
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+endif
 
 let fortran_free_source=1
 
-map Y y$
+nmap Y y$
 
 autocmd BufReadPost *
-\ if &filetype != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+\ if &filetype != 'gitcommit' && &filetype != 'gitrebase' && line("'\"") > 0 && line("'\"") <= line("$") |
 \ exe "normal g`\"" |
 \ endif
 
-"autocmd BufNewFile,BufReadPre *.yaml,*.yml setlocal regexpengine=1
 autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2
 autocmd FileType php setlocal noexpandtab softtabstop=0 shiftwidth=0
 autocmd FileType c,cpp setlocal noexpandtab softtabstop=0 shiftwidth=0
