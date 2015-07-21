@@ -15,7 +15,7 @@ export EDITOR='vim'
 export BLOCKSIZE=K
 export LANG='en_US.UTF-8'
 
-for f in $HOME/.zsh/*.zsh ; do
+for f in $HOME/.zsh/*.zsh(.N) ; do
     [[ -e $f ]] && . $f
 done
 
