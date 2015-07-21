@@ -15,9 +15,9 @@ export EDITOR='vim'
 export BLOCKSIZE=K
 export LANG='en_US.UTF-8'
 
-#for f in $HOME/.zsh/*.zsh ; do
-#    . $f
-#done
+for f in $HOME/.zsh/*.zsh ; do
+    [[ -e $f ]] && . $f
+done
 
 setopt HIST_IGNORE_DUPS
 
