@@ -10,6 +10,7 @@ Plugin 'tpope/vim-surround'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'rust-lang/rust.vim'
+Bundle 'phildawes/racer'
 
 call vundle#end()
 
@@ -52,6 +53,11 @@ set wildignore+=.o,.out
 
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+if filereadable(expand('~/.vim/bundle/racer/target/release/racer'))
+    let g:racer_cmd = '~/.vim/bundle/racer/target/release/racer'
+    let $RUST_SRC_PATH = expand('~/projects/rust/rust/src')
 endif
 
 let fortran_free_source=1
