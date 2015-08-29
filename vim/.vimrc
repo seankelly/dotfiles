@@ -6,11 +6,11 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'phildawes/racer'
 
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'rust-lang/rust.vim'
-Bundle 'phildawes/racer'
 
 call vundle#end()
 
@@ -55,10 +55,7 @@ if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-if filereadable(expand('~/.vim/bundle/racer/target/release/racer'))
-    let g:racer_cmd = '~/.vim/bundle/racer/target/release/racer'
-    let $RUST_SRC_PATH = expand('~/projects/rust/rust/src')
-endif
+let $RUST_SRC_PATH = expand('~/projects/rust/rust/src')
 
 let fortran_free_source=1
 
