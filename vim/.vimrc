@@ -6,10 +6,9 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround'
-Plugin 'phildawes/racer'
 
 Bundle 'Lokaltog/vim-distinguished'
-Bundle 'davidhalter/jedi-vim'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'rust-lang/rust.vim'
 
 call vundle#end()
@@ -55,7 +54,7 @@ if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-let $RUST_SRC_PATH = expand('~/projects/rust/rust/src')
+let g:ycm_rust_src_path = expand('~/projects/rust/rust/src')
 
 let fortran_free_source=1
 
