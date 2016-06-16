@@ -16,3 +16,5 @@
     email = code@katron.org
 [alias]
     ffpull = pull --ff-only
+[diff]
+    compactionHeuristic = true
