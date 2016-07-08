@@ -34,4 +34,3 @@ if [[ $TERM == screen ]]; then
 fi
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
-export PATH=$PATH:$HOME/local/bin
