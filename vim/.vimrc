@@ -7,9 +7,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround'
 
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'rust-lang/rust.vim'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'rust-lang/rust.vim'
 Plugin 'othree/html5.vim'
 
 call vundle#end()
