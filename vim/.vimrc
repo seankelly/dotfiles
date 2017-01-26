@@ -68,6 +68,7 @@ autocmd BufReadPost *
 
 autocmd FileType c,cpp setlocal noexpandtab softtabstop=0 shiftwidth=0
 autocmd FileType php setlocal noexpandtab softtabstop=0 shiftwidth=0
+autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2
 autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2
 
 colorscheme distinguished
