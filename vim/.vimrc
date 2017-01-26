@@ -66,8 +66,8 @@ autocmd BufReadPost *
 \ exe "normal g`\"" |
 \ endif
 
-autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2
-autocmd FileType php setlocal noexpandtab softtabstop=0 shiftwidth=0
 autocmd FileType c,cpp setlocal noexpandtab softtabstop=0 shiftwidth=0
+autocmd FileType php setlocal noexpandtab softtabstop=0 shiftwidth=0
+autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2
 
 colorscheme distinguished
