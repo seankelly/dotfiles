@@ -61,6 +61,11 @@ let fortran_free_source=1
 
 nmap Y y$
 
+au BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "gitcommit" |
+        \ execute("normal `\"") |
+    \ endif
+
 autocmd FileType c,cpp setlocal noexpandtab softtabstop=8 shiftwidth=8
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 autocmd FileType php setlocal noexpandtab softtabstop=8 shiftwidth=8
