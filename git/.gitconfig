@@ -17,4 +17,4 @@
 [alias]
     ffpull = pull --ff-only
 [diff]
-    compactionHeuristic = true
+    indentHeuristic = true
