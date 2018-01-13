@@ -5,6 +5,7 @@ set -u
 
 PACKAGES='
 bash
+fish
 git
 tmux
 vim
