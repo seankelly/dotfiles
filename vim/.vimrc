@@ -51,6 +51,7 @@ set ttimeoutlen=50
 set undofile
 set undodir=$HOME/.vim/undo
 set wildignore+=.o,.out
+set wildmode=longest,list,full
 
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
