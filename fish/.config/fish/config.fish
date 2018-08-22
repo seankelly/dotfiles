@@ -1,4 +1,4 @@
-for d in ~/local/bin ~/.cargo/bin
+for d in ~/local/bin ~/.cargo/bin ~/.gem/bin
     if test -d $d; and not contains $d $PATH
         set PATH $d $PATH
     end
