@@ -11,6 +11,7 @@ Plugin 'Lokaltog/vim-distinguished'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rust-lang/rust.vim'
 Plugin 'othree/html5.vim'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 
@@ -65,6 +66,11 @@ au BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "gitcommit" |
         \ execute("normal `\"") |
     \ endif
+
+if !exists("g:ycm_semantic_triggers")
+    let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 autocmd FileType c,cpp setlocal noexpandtab softtabstop=8 shiftwidth=8
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
