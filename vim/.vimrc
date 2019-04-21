@@ -60,8 +60,6 @@ elseif executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-let g:ycm_rust_src_path = expand('~/projects/rust/rust/src')
-
 let fortran_free_source=1
 
 nmap Y y$
