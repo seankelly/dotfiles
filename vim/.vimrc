@@ -9,6 +9,7 @@ Plugin 'tpope/vim-surround'
 
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'cespare/vim-toml'
 Plugin 'rust-lang/rust.vim'
 Plugin 'othree/html5.vim'
 Plugin 'leafgarland/typescript-vim'
