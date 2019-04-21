@@ -5,14 +5,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-surround'
 
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'cespare/vim-toml'
-Plugin 'rust-lang/rust.vim'
-Plugin 'othree/html5.vim'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'othree/html5.vim'
+Plugin 'rust-lang/rust.vim'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()
 
