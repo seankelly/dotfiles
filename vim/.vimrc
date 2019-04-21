@@ -62,17 +62,19 @@ endif
 
 let fortran_free_source=1
 
+let g:ycm_python_binary_path = 'python'
+
+if !exists("g:ycm_semantic_triggers")
+    let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+
 nmap Y y$
 
 au BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "gitcommit" |
         \ execute("normal `\"") |
     \ endif
-
-if !exists("g:ycm_semantic_triggers")
-    let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
 
 autocmd FileType c,cpp setlocal noexpandtab softtabstop=8 shiftwidth=8
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
