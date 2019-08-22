@@ -13,7 +13,7 @@ vim
 
 
 if command -v stow >/dev/null ; then
-    stow $PACKAGES --target "$HOME"
+    stow --verbose $PACKAGES --target "$HOME"
 else
     echo >&2 "Need to have stow installed."
     exit 1
