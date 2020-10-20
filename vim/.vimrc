@@ -7,7 +7,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Lokaltog/vim-distinguished'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'cespare/vim-toml'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'othree/html5.vim'
