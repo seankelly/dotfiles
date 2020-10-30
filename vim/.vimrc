@@ -78,6 +78,7 @@ autocmd BufReadPost *
     \ | endif
 
 autocmd FileType c,cpp setlocal noexpandtab softtabstop=8 shiftwidth=8
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 autocmd FileType php setlocal noexpandtab softtabstop=8 shiftwidth=8
 autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2
 autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2
