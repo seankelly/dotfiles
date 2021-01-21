@@ -18,6 +18,12 @@ set __fish_git_prompt_char_stashstate '↩'
 set __fish_git_prompt_char_upstream_ahead '↑'
 set __fish_git_prompt_char_upstream_behind '↓'
 
+# FreeBSD before 13.0 doesn't have tmux entries in its termcap. Fall back to
+# xterm-256color if running as tmux-256color.
+if test (uname -s) = FreeBSD && test (uname -K) -lt 1300000 && test $TERM = tmux-256color ;
+    set -x TERM xterm-256color
+end
+
 ### Functions
 function fish_prompt
     set last_status $status
