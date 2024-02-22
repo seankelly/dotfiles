@@ -1,8 +1,14 @@
+[alias]
+    ffpull = pull --ff-only
 [core]
     excludesfile = /home/sean/.gitignore
     preloadindex = true
 [color]
     ui = auto
+[diff]
+    indentHeuristic = true
+[init]
+    defaultBranch = main
 [log]
     date = local
 [merge]
@@ -14,7 +20,3 @@
 [user]
     name = Sean Kelly
     email = code@katron.org
-[alias]
-    ffpull = pull --ff-only
-[diff]
-    indentHeuristic = true
