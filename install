@@ -3,7 +3,7 @@
 set -e
 set -u
 
-PACKAGES='
+HOME_PACKAGES='
 bash
 fish
 git
@@ -11,9 +11,17 @@ tmux
 vim
 '
 
+CONFIG_PACKAGES='
+nvim
+'
+
 
 if command -v stow >/dev/null ; then
-    stow --verbose $PACKAGES --target "$HOME"
+    stow --verbose --target "$HOME" $HOME_PACKAGES
+    for package in $CONFIG_PACKAGES ; do
+        target=${XDG_CONFIG_HOME:-$HOME/.config/$package}
+        stow --verbose --target "$target" $package
+    done
 else
     echo >&2 "Need to have stow installed."
     exit 1
